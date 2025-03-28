@@ -15,7 +15,8 @@ source opt/venv_py_MCAP/bin/activate
 pip install --upgrade pip
 pip install --upgrade setuptools
 pip install numpy control matplotlib mplcursors pandas jupyter openpyxl sympy astor python3-tk
-sudo apt install -y -q python3-tk
+apt install -y -q python3-tk
+apt install -y -q pybind11-dev
 
 ## Clone MCAP repositories
 cd /opt
