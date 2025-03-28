@@ -3,6 +3,7 @@ ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 apt update -q
 apt upgrade -y -q
 
+apt install -y -q git
 apt install -y -q build-essential
 apt install -y -q cmake
 apt install -y -q x11-apps
