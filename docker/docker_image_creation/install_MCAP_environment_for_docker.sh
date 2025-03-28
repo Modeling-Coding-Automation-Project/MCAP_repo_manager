@@ -27,9 +27,9 @@ cd ./ModelingCodingAutomationProject
 git clone https://github.com/Modeling-Coding-Automation-Project/MCAP_repo_manager.git
 
 cd ./MCAP_repo_manager
-chmod +x ./git_supporter/clone_MCAP.py ./git_supporter/update_all_submodules.py
+chmod +x /git_supporter/clone_MCAP.py /git_supporter/update_all_submodules.py
 
-python3 ./git_supporter/clone_MCAP.py --folder /opt/ModelingCodingAutomationProject
-python3 ./git_supporter/update_all_submodules.py --folder /opt/ModelingCodingAutomationProject
+python3 /git_supporter/clone_MCAP.py --folder /opt/ModelingCodingAutomationProject
+python3 /git_supporter/update_all_submodules.py --folder /opt/ModelingCodingAutomationProject
 
 deactivate
