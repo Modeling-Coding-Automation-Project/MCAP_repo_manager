@@ -29,7 +29,7 @@ cd /opt
 mkdir ModelingCodingAutomationProject
 cd ./ModelingCodingAutomationProject
 
-git clone https://github.com/Modeling-Coding-Automation-Project/MCAP_repo_manager.git -b create_docker
+git clone https://github.com/Modeling-Coding-Automation-Project/MCAP_repo_manager.git
 
 cd ./MCAP_repo_manager/git_supporter
 chmod +x clone_MCAP.py update_all_submodules.py
@@ -38,5 +38,3 @@ cd ../
 
 python3 ./git_supporter/clone_MCAP.py --folder /opt/ModelingCodingAutomationProject
 python3 ./git_supporter/update_all_submodules.py --folder /opt/ModelingCodingAutomationProject
-
-deactivate
