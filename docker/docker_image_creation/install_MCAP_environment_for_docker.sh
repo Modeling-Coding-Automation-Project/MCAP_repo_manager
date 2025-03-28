@@ -7,6 +7,7 @@ apt install -y -q git
 apt install -y -q build-essential
 apt install -y -q cmake
 apt install -y -q x11-apps
+sudo apt install -y -q xvfb
 
 # install python3.12
 apt install -y -q python3.12 python3.12-dev python3.12-venv
@@ -31,6 +32,9 @@ cd ./MCAP_repo_manager/git_supporter
 chmod +x clone_MCAP.py update_all_submodules.py
 
 cd ../
+
+Xvfb :99 -screen 0 1024x768x16 &
+export DISPLAY=:99
 
 python3 ./git_supporter/clone_MCAP.py --folder /opt/ModelingCodingAutomationProject
 python3 ./git_supporter/update_all_submodules.py --folder /opt/ModelingCodingAutomationProject
