@@ -4,17 +4,18 @@ apt update -q
 apt upgrade -y -q
 
 apt install -y -q build-essential
+apt install -y -q cmake
 apt install -y -q x11-apps
 
 # install python3.12
-apt install -y -q python3.12 python3.12-venv
+apt install -y -q python3.12 python3.12-dev python3.12-venv
 python3 -m venv /opt/venv_py_MCAP
 
 source opt/venv_py_MCAP/bin/activate
 
 pip install --upgrade pip
 pip install --upgrade setuptools
-pip install numpy control matplotlib mplcursors pandas jupyter openpyxl sympy astor python3-tk
+pip install numpy control matplotlib mplcursors pandas jupyter openpyxl sympy astor pybind11
 apt install -y -q python3-tk
 apt install -y -q pybind11-dev
 
