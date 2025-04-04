@@ -1,0 +1,10 @@
+version: '3'
+services:
+  my_service:
+    build:
+      context: ./docker_image_creation
+    image: mcap_env:latest
+    container_name: mcap_env_container
+    restart: always
+    stdin_open: true
+    tty: true
