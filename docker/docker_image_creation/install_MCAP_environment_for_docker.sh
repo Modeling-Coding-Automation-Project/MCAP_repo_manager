@@ -18,7 +18,7 @@ python3 -m venv /opt/venv_py_MCAP
 
 /opt/venv_py_MCAP/bin/pip install --upgrade pip
 /opt/venv_py_MCAP/bin/pip install --upgrade setuptools
-/opt/venv_py_MCAP/bin/pip install numpy control matplotlib mplcursors pandas jupyter openpyxl sympy astor pybind11 networkx
+/opt/venv_py_MCAP/bin/pip install numpy scipy control matplotlib mplcursors pandas jupyter openpyxl sympy astor pybind11 networkx
 apt install -y -q python3-tk
 
 ## Clone MCAP repositories
