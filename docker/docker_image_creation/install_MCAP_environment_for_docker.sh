@@ -6,6 +6,7 @@ apt upgrade -y -q
 apt install -y -q git
 apt install -y -q build-essential
 apt install -y -q cmake
+apt install -y -q gdb
 apt install -y -q x11-apps
 apt install -y -q xvfb
 apt install -y -q clang-format
