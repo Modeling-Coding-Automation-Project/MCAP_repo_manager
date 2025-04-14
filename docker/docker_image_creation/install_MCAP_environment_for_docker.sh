@@ -3,6 +3,35 @@ ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 apt update -q
 apt upgrade -y -q
 
+apt install -y -q curl \
+    wget \
+    gnupg \
+    apt-transport-https \
+    software-properties-common \
+    libx11-xcb1 \
+    libxkbfile1 \
+    libsecret-1-0 \
+    libgtk-3-0 \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    xdg-utils \
+    unzip \
+
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
+    && install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ \
+    && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' \
+    && rm microsoft.gpg
+
+apt update -q
+apt install -y -q code
+
+code --install-extension ms-python.python
+code --install-extension ms-python.autopep8
+code --install-extension ms-vscode.cpptools-extension-pack
+code --install-extension mhutchie.git-graph
+code --install-extension xaver.clang-format
+
 apt install -y -q git
 apt install -y -q build-essential
 apt install -y -q cmake
@@ -36,3 +65,5 @@ cd ../
 
 /opt/venv_py_MCAP/bin/python3 ./git_supporter/clone_MCAP.py --folder /opt/ModelingCodingAutomationProject
 /opt/venv_py_MCAP/bin/python3 ./git_supporter/update_all_submodules.py --folder /opt/ModelingCodingAutomationProject
+
+rm -rf /var/lib/apt/lists/*
