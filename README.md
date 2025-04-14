@@ -8,6 +8,12 @@
 
 https://hub.docker.com/r/claudeashford/mcap_env
 
+以下のコマンドを実行してイメージを取得できます。
+
+```
+docker pull claudeashford/mcap_env
+```
+
 イメージの詳細については、「docker/docker_image_creation/Dockerfile」、「docker/docker_image_creation/install_MCAP_environment_for_docker.sh」をご参照ください。
 
 WSL UbuntuにDocker環境を整えるには、「docker/install_docker_environment.sh」を実行するだけですぐに整えることができます。
