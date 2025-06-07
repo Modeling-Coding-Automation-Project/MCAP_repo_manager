@@ -8,6 +8,7 @@ class MCAP_info:
         "python_math_to_cpp": "https://github.com/Modeling-Coding-Automation-Project/python_math_to_cpp.git",
         "python_mpc_to_cpp": "https://github.com/Modeling-Coding-Automation-Project/python_mpc_to_cpp.git",
         "python_numpy_to_cpp": "https://github.com/Modeling-Coding-Automation-Project/python_numpy_to_cpp.git",
+        "python_optimization_to_cpp": "https://github.com/Modeling-Coding-Automation-Project/python_optimization_to_cpp.git",
         "python_quaternion_to_cpp": "https://github.com/Modeling-Coding-Automation-Project/python_quaternion_to_cpp.git",
         "simulation_manager": "https://github.com/Modeling-Coding-Automation-Project/simulation_manager.git"
     }
