@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+"""
+This module provides a function to perform an "orphan pull" operation on a Git repository.
+The `orphan_pull` function automates the process of forcefully updating the current branch
+by temporarily creating a new branch, deleting the original branch, and recreating it from
+the remote tracking branch. This can be useful for resolving issues with diverged or corrupted
+local branches.
+"""
 
 import os
 import subprocess
@@ -9,6 +15,7 @@ from get_git_repository import get_git_repository
 
 
 def orphan_pull():
+
     # %% Init
     folder_path, original_directory = get_git_repository()
     os.chdir(folder_path)

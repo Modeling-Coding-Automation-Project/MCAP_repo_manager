@@ -1,4 +1,11 @@
-#!/usr/bin/env python3
+"""
+This module provides the `orphan_push` function,
+which automates the process of creating an orphan branch in a Git repository,
+committing the current state, pushing it to the remote,
+and replacing the original branch with the orphaned history.
+This is useful for resetting branch history while preserving
+the current working tree as the new root commit.
+"""
 
 import os
 import subprocess

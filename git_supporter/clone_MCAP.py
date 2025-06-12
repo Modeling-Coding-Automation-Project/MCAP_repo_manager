@@ -1,4 +1,8 @@
-#!/usr/bin/env python3
+"""
+This script provides a command-line utility to clone multiple Git repositories listed in the MCAP_info module.
+It allows the user to specify a target folder via a command-line argument or a GUI folder selection dialog.
+The script changes the working directory to the selected folder and clones each repository using the system's Git command.
+"""
 
 import os
 import sys
@@ -12,7 +16,8 @@ from parameter.MCAP_info import MCAP_info
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Clone repositories listed in MCAP_info.")
+    parser = argparse.ArgumentParser(
+        description="Clone repositories listed in MCAP_info.")
     parser.add_argument(
         "--folder",
         type=str,
@@ -36,6 +41,7 @@ def main():
 
     for repo_path in MCAP_info.repository_list.values():
         os.system("git clone " + repo_path)
+
 
 if __name__ == "__main__":
     main()

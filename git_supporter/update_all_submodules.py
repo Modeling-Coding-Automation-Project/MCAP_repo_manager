@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import os
 import sys
 sys.path.append(os.getcwd())
@@ -13,7 +11,14 @@ from parameter.MCAP_info import MCAP_info
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Clone repositories listed in MCAP_info.")
+    """
+    This script provides a command-line utility to update all git submodules for repositories listed in the MCAP_info configuration.
+    It allows the user to specify a target folder via a command-line argument or a GUI folder selection dialog.
+    For each repository directory specified in MCAP_info.repository_list, the script navigates to the directory and runs
+    'git submodule update --progress --init' to initialize and update all submodules.
+    """
+    parser = argparse.ArgumentParser(
+        description="Clone repositories listed in MCAP_info.")
     parser.add_argument(
         "--folder",
         type=str,
@@ -43,6 +48,7 @@ def main():
         os.chdir(path)
         subprocess.run("git submodule update --progress --init", shell=True)
         os.chdir(original_directory)
+
 
 if __name__ == "__main__":
     main()
