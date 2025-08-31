@@ -3,3 +3,5 @@ REPOSITORY_TO_UPDATE_LIST = [
 ]
 
 PULL_ALL_SUBMODULES_PATH = ".\git_supporter\pull_all_submodules.py"
+
+CHECK_ACTIONS_INTERVAL_TIME = 10
