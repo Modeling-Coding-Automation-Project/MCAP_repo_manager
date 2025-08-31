@@ -24,17 +24,16 @@ def gh_json(args: list[str], cwd=None) -> list[dict] | dict:
 
 
 def find_run_id_for_sha(branch: str, head_sha: str, limit: int = 30, cwd=None) -> Optional[int]:
-    """Look for recent runs on the target branch and find one that matches the headSha."""
+    """Look for recent runs on the target branch and return all that match the headSha as a list of databaseId."""
     data = gh_json([
         "run", "list",
         "--branch", branch,
         "--limit", str(limit),
         "--json", "databaseId,headSha,status,conclusion,displayTitle,createdAt",
     ], cwd=cwd)
-    for r in data:
-        if r.get("headSha") == head_sha:
-            return r.get("databaseId")
-    return None
+    run_ids = [r.get("databaseId")
+               for r in data if r.get("headSha") == head_sha]
+    return run_ids if run_ids else None
 
 
 def gh_wait_run(run_id: int, cwd=None) -> int:
@@ -48,25 +47,27 @@ def gh_wait_run(run_id: int, cwd=None) -> int:
 
 
 def add_actions_and_check_results(branch, head_sha, cwd=None):
-    """Look for the run ID and wait for the workflow result, running gh commands in the specified cwd."""
-    run_id = None
+    """Look for all run IDs for the given SHA/branch and wait for all workflow results. All must succeed."""
+    run_ids = None
     for i in range(CHECK_ACTIONS_MAX_TRY):
-        run_id = find_run_id_for_sha(branch, head_sha, cwd=cwd)
-        if run_id:
+        run_ids = find_run_id_for_sha(branch, head_sha, cwd=cwd)
+        if run_ids:
             break
         time.sleep(CHECK_ACTIONS_INTERVAL_TIME)
 
-    if not run_id:
+    if not run_ids:
         raise GHError("Could not find workflow run for the given SHA/branch")
 
-    print(f"Found run: {run_id}. Waiting...")
-    code = gh_wait_run(run_id, cwd=cwd)
-    if code == 0:
-        print("Workflow success")
-        success_flag = True
-    else:
-        print("Workflow failed")
-        success_flag = False
-        raise SystemExit(code)
-
-    return success_flag
+    print(f"Found runs: {run_ids}. Waiting...")
+    all_success = True
+    for run_id in run_ids:
+        code = gh_wait_run(run_id, cwd=cwd)
+        if code == 0:
+            print(f"Workflow {run_id} success")
+        else:
+            print(f"Workflow {run_id} failed")
+            all_success = False
+    if not all_success:
+        raise SystemExit(1)
+    print("All workflows succeeded")
+    return True
