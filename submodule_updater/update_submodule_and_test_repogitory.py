@@ -94,6 +94,13 @@ if __name__ == "__main__":
         if update_exists_flag:
             # Update GitHub Actions workflow YAMLs to trigger on the new branch
             head_sha = update_github_actions_yaml(folder_path, branch_name)
+            if not head_sha:
+                print("There are no GitHub Actions workflow files.")
+
+                squash_merge_and_push(folder_path, branch_name)
+                print(f"Submodule update of {folder_path} completed.")
+                continue
+
             # Trigger GitHub Actions
             success_flag = add_actions_and_check_results(
                 branch_name, head_sha, folder_path)

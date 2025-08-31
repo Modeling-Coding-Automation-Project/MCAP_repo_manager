@@ -34,7 +34,9 @@ def update_github_actions_yaml(repo_path, branch_name):
     workflows_dir = os.path.join(repo_path, ".github", "workflows")
     if not os.path.isdir(workflows_dir):
         print(f"No workflows directory: {workflows_dir}")
-        return
+        head_sha = None
+        return head_sha
+
     yml_files = glob.glob(os.path.join(workflows_dir, "*.yml")) + \
         glob.glob(os.path.join(workflows_dir, "*.yaml"))
     changed_files = []
