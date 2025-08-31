@@ -3,7 +3,7 @@ import subprocess
 import time
 from typing import Optional
 
-from submodule_updater.parameter import *
+from submodule_updater.constants import *
 
 
 class GHError(Exception):

@@ -5,9 +5,19 @@ sys.path.append(os.getcwd())
 from datetime import datetime
 
 from submodule_updater.common_functions import *
-from submodule_updater.parameter import *
+from submodule_updater.constants import *
 from submodule_updater.github_actions_yaml_editor import *
 from submodule_updater.manage_github_actions import add_actions_and_check_results
+
+from parameter.MCAP_info import MCAP_info
+
+
+def replace_github_to_local_path(url_path):
+    local_path = url_path
+    for github, local in GITHUB_TO_LOCAL_PATH:
+        local_path = local_path.replace(
+            github, local)
+    return local_path
 
 
 def update_submodules(repository_path):
@@ -72,7 +82,8 @@ def squash_merge_and_push(repo_path, branch_name):
 
 
 if __name__ == "__main__":
-    folder_path = REPOSITORY_TO_UPDATE_LIST[0]
+    url_path = MCAP_info.repository_list.get("base_utility_cpp")
+    folder_path = replace_github_to_local_path(url_path)
 
     # update submodules
     update_submodules(folder_path)
