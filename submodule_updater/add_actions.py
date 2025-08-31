@@ -11,7 +11,7 @@ class GHError(Exception):
 
 
 def gh_json(args: list[str]) -> list[dict] | dict:
-    """ghコマンドを --json 付きで実行してJSONを返す"""
+    """Execute the gh command with --json and return the JSON output"""
     cp = subprocess.run(
         ["gh"] + args,
         check=True,
@@ -24,7 +24,7 @@ def gh_json(args: list[str]) -> list[dict] | dict:
 
 def find_run_id_for_sha(branch: str, head_sha: str, limit: int = 30) -> Optional[int]:
     """
-    gh run list で対象ブランチの最近のRunを見て、headSha一致を拾う。
+    Look for recent runs on the target branch and find one that matches the headSha.
     """
     data = gh_json([
         "run", "list",
@@ -40,7 +40,7 @@ def find_run_id_for_sha(branch: str, head_sha: str, limit: int = 30) -> Optional
 
 def gh_wait_run(run_id: int) -> int:
     """
-    gh run watch --exit-status で待機。成功=0, 失敗≠0
+    Wait for the GitHub Actions run to complete and return the exit status.
     """
     cp = subprocess.run(
         ["gh", "run", "watch", str(run_id), "--exit-status"],
@@ -53,9 +53,9 @@ if __name__ == "__main__":
     branch = "update-submodule-20250830-01"
     head_sha = "YOUR_PUSHED_COMMIT_SHA"
 
-    # run-idを探す（push直後は数秒遅延することがある）
+    # Look for the run ID (there may be a delay of a few seconds immediately after push)
     run_id = None
-    for i in range(30):  # 最大 ~5分探す例
+    for i in range(CHECK_ACTIONS_MAX_TRY):
         run_id = find_run_id_for_sha(branch, head_sha)
         if run_id:
             break
