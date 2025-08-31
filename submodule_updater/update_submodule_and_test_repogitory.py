@@ -43,6 +43,9 @@ def create_working_branch(repo_path):
     result = run_os_command("git status --porcelain", cwd, check=False)
     if result.stdout.strip() == "":
         print("No changes to commit.")
+
+        run_os_command("git checkout -", cwd)
+        run_os_command(f"git branch -D {branch_name}", cwd)
         return
 
     run_os_command(f"git commit -m 'Update submodules {today}'", cwd)
