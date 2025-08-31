@@ -47,6 +47,30 @@ def create_working_branch(repo_path):
     return update_exists_flag, branch_name, head_sha
 
 
+def squash_merge_and_push(repo_path, branch_name):
+    """
+    Squash merge branch_name into develop, push, then merge develop into main and push.
+    The squash merge commit message is 'サブモジュール更新'.
+    """
+    cwd = os.path.abspath(repo_path)
+
+    run_os_command("git checkout develop", cwd)
+    run_os_command("git pull", cwd)
+
+    run_os_command(f"git merge --squash {branch_name}", cwd)
+    run_os_command("git commit -m \"サブモジュール更新\"", cwd)
+    run_os_command("git push", cwd)
+
+    run_os_command("git checkout main", cwd)
+    run_os_command("git pull", cwd)
+
+    run_os_command("git merge develop", cwd)
+    run_os_command("git push", cwd)
+
+    run_os_command(f"git branch -D {branch_name}", cwd)
+    run_os_command(f"git push origin --delete {branch_name}", cwd)
+
+
 if __name__ == "__main__":
     folder_path = REPOSITORY_TO_UPDATE_LIST[0]
 
@@ -67,3 +91,6 @@ if __name__ == "__main__":
             sys.exit(1)
 
         revert_github_actions_yaml(folder_path, branch_name)
+
+        squash_merge_and_push(folder_path, branch_name)
+        print("Submodule update of " + folder_path + " completed.")
