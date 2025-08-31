@@ -65,3 +65,5 @@ if __name__ == "__main__":
 
         if not success_flag:
             sys.exit(1)
+
+        revert_github_actions_yaml(folder_path, branch_name)

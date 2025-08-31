@@ -74,3 +74,48 @@ def update_github_actions_yaml(repo_path, branch_name):
         head_sha = None
 
     return head_sha
+
+
+def revert_github_actions_yaml(repo_path, branch_name):
+    """
+    Revert all .yml files in .github/workflows/ to set push trigger branches back to ["develop"]
+    if they were changed to ["develop", branch_name].
+    """
+    import os
+    import glob
+    import yaml
+    workflows_dir = os.path.join(repo_path, ".github", "workflows")
+    if not os.path.isdir(workflows_dir):
+        print(f"No workflows directory: {workflows_dir}")
+        return
+    yml_files = glob.glob(os.path.join(workflows_dir, "*.yml")) + \
+        glob.glob(os.path.join(workflows_dir, "*.yaml"))
+    changed_files = []
+    for yml_file in yml_files:
+        with open(yml_file, encoding="utf-8") as f:
+            try:
+                data = yaml.safe_load(f)
+            except Exception as e:
+                print(f"Failed to parse {yml_file}: {e}")
+                continue
+        on_section = get_on_section(data)
+        if isinstance(on_section, dict):
+            push_section = on_section.get("push")
+            if isinstance(push_section, dict):
+                branches = push_section.get("branches")
+                if branches == ["develop", branch_name]:
+                    push_section["branches"] = ["develop"]
+                    with open(yml_file, "w", encoding="utf-8") as f:
+                        yaml.dump(data, f, allow_unicode=True, sort_keys=False)
+                    changed_files.append(yml_file)
+    if changed_files:
+        brush_up_yaml_text(changed_files)
+
+        cwd = os.path.abspath(repo_path)
+        run_os_command("git add .github/workflows", cwd)
+        run_os_command(
+            f"git commit -m \"Revert GitHub Actions workflow branches to develop only\"", cwd)
+        run_os_command(f"git push", cwd)
+        print(f"Reverted workflow files: {changed_files}")
+    else:
+        print("No workflow files needed reverting.")
