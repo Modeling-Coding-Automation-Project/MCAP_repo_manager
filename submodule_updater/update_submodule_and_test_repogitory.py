@@ -7,7 +7,7 @@ from datetime import datetime
 from submodule_updater.common_functions import *
 from submodule_updater.constants import *
 from submodule_updater.github_actions_yaml_editor import *
-from submodule_updater.manage_github_actions import add_actions_and_check_results
+from submodule_updater.github_actions_manager import add_actions_and_check_results
 
 from parameter.MCAP_info import MCAP_info
 
@@ -82,26 +82,26 @@ def squash_merge_and_push(repo_path, branch_name):
 
 
 if __name__ == "__main__":
-    url_path = MCAP_info.repository_list.get("base_utility_cpp")
-    folder_path = replace_github_to_local_path(url_path)
+    for repo_name, url_path in MCAP_info.repository_list.items():
+        folder_path = replace_github_to_local_path(url_path)
 
-    # update submodules
-    update_submodules(folder_path)
+        # update submodules
+        update_submodules(folder_path)
 
-    update_exists_flag, branch_name, head_sha = create_working_branch(
-        folder_path)
+        update_exists_flag, branch_name, head_sha = create_working_branch(
+            folder_path)
 
-    if update_exists_flag:
-        # Update GitHub Actions workflow YAMLs to trigger on the new branch
-        head_sha = update_github_actions_yaml(folder_path, branch_name)
-        # Trigger GitHub Actions
-        success_flag = add_actions_and_check_results(
-            branch_name, head_sha, folder_path)
+        if update_exists_flag:
+            # Update GitHub Actions workflow YAMLs to trigger on the new branch
+            head_sha = update_github_actions_yaml(folder_path, branch_name)
+            # Trigger GitHub Actions
+            success_flag = add_actions_and_check_results(
+                branch_name, head_sha, folder_path)
 
-        if not success_flag:
-            sys.exit(1)
+            if not success_flag:
+                sys.exit(1)
 
-        revert_github_actions_yaml(folder_path, branch_name)
+            revert_github_actions_yaml(folder_path, branch_name)
 
-        squash_merge_and_push(folder_path, branch_name)
-        print("Submodule update of " + folder_path + " completed.")
+            squash_merge_and_push(folder_path, branch_name)
+            print(f"Submodule update of {folder_path} completed.")
