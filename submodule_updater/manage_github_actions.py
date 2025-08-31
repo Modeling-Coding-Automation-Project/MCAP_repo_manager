@@ -65,6 +65,10 @@ def add_actions_and_check_results(branch, head_sha):
     code = gh_wait_run(run_id)
     if code == 0:
         print("Workflow success")
+        success_flag = True
     else:
         print("Workflow failed")
+        success_flag = False
     raise SystemExit(code)
+
+    return success_flag
