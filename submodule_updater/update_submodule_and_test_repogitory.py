@@ -1,10 +1,14 @@
 import os
 import sys
+sys.path.append(os.getcwd())
+
 import subprocess
 from datetime import datetime
 
+from submodule_updater.parameter import REPOSITORY_TO_UPDATE_LIST
 
-def run_cmd(cmd, cwd=None, check=True):
+
+def run_os_command(cmd, cwd=None, check=True):
     print(f"[RUN] {cmd}")
     result = subprocess.run(cmd, shell=True, cwd=cwd,
                             capture_output=True, text=True)
@@ -17,39 +21,42 @@ def run_cmd(cmd, cwd=None, check=True):
     return result
 
 
-def main(repo_path):
+def create_working_branch(repo_path):
     today = datetime.now().strftime('%Y%m%d')
     branch_name = f"update-submodule-{today}"
     cwd = os.path.abspath(repo_path)
 
     # 1. checkout develop and pull
-    run_cmd("git checkout develop", cwd)
-    run_cmd("git pull", cwd)
+    run_os_command("git checkout develop", cwd)
+    run_os_command("git pull", cwd)
 
     # 2. create new branch
-    run_cmd(f"git checkout -b {branch_name}", cwd)
+    run_os_command(f"git checkout -b {branch_name}", cwd)
 
     # 3. update submodules
-    run_cmd("git submodule update --remote", cwd)
+    run_os_command("git submodule update --remote", cwd)
 
     # 4. add submodule changes
-    run_cmd("git add .", cwd)
+    run_os_command("git add .", cwd)
 
     # 5. check if there is anything to commit
-    result = run_cmd("git status --porcelain", cwd, check=False)
+    result = run_os_command("git status --porcelain", cwd, check=False)
     if result.stdout.strip() == "":
         print("No changes to commit.")
         return
 
     # 6. commit
-    run_cmd(f"git commit -m 'Update submodules {today}'", cwd)
+    run_os_command(f"git commit -m 'Update submodules {today}'", cwd)
 
     # 7. push
-    run_cmd(f"git push -u origin {branch_name}", cwd)
+    run_os_command(f"git push -u origin {branch_name}", cwd)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python update_submodule_and_test_repogitory.py <repo_path>")
-        sys.exit(1)
-    main(sys.argv[1])
+    folder_path = REPOSITORY_TO_UPDATE_LIST[0]
+
+    # update submodules
+    command = ".\git_supporter\pull_all_submodules.py " + folder_path
+    result = run_os_command(command)
+
+    create_working_branch(folder_path)
