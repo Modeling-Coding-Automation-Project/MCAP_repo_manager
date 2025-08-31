@@ -71,4 +71,8 @@ if __name__ == "__main__":
 
     if update_exists_flag:
         # GitHub Actions
-        add_actions_and_check_results(branch_name, head_sha)
+        success_flag = add_actions_and_check_results(branch_name, head_sha)
+
+        if not success_flag:
+            print("GitHub Actions failed.")
+            sys.exit(1)
