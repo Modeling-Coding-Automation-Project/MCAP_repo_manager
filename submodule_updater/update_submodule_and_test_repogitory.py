@@ -46,11 +46,11 @@ def create_working_branch(repo_path):
 
         run_os_command("git checkout -", cwd)
         run_os_command(f"git branch -D {branch_name}", cwd)
-        return
-
-    run_os_command(f"git commit -m 'Update submodules {today}'", cwd)
-
-    run_os_command(f"git push -u origin {branch_name}", cwd)
+        return False
+    else:
+        run_os_command(f"git commit -m 'Update submodules {today}'", cwd)
+        run_os_command(f"git push -u origin {branch_name}", cwd)
+        return True
 
 
 if __name__ == "__main__":
@@ -59,4 +59,4 @@ if __name__ == "__main__":
     # update submodules
     update_submodules(folder_path)
 
-    create_working_branch(folder_path)
+    update_exists_flag = create_working_branch(folder_path)
