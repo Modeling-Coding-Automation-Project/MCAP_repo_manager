@@ -6,6 +6,7 @@ import subprocess
 from datetime import datetime
 
 from submodule_updater.parameter import *
+from submodule_updater.manage_github_actions import add_actions_and_check_results
 
 
 def run_os_command(cmd, cwd=None, check=True):
@@ -46,11 +47,13 @@ def create_working_branch(repo_path):
 
         run_os_command("git checkout -", cwd)
         run_os_command(f"git branch -D {branch_name}", cwd)
-        return False
+        update_exists_flag = False
     else:
         run_os_command(f"git commit -m 'Update submodules {today}'", cwd)
         run_os_command(f"git push -u origin {branch_name}", cwd)
-        return True
+        update_exists_flag = True
+
+    return update_exists_flag
 
 
 if __name__ == "__main__":

@@ -49,10 +49,7 @@ def gh_wait_run(run_id: int) -> int:
     return cp.returncode
 
 
-if __name__ == "__main__":
-    branch = "update-submodule-20250830-01"
-    head_sha = "YOUR_PUSHED_COMMIT_SHA"
-
+def add_actions_and_check_results(branch, head_sha):
     # Look for the run ID (there may be a delay of a few seconds immediately after push)
     run_id = None
     for i in range(CHECK_ACTIONS_MAX_TRY):
