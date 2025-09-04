@@ -47,8 +47,13 @@ def gh_wait_run(run_id: int, cwd=None) -> int:
 
 
 def add_actions_and_check_results(branch, head_sha, cwd=None):
-    """Look for all run IDs for the given SHA/branch and wait for all workflow results. All must succeed."""
+    """
+    Look for all run IDs for the given SHA/branch and
+    wait for all workflow results. All must succeed.
+    """
     run_ids = None
+    time.sleep(CHECK_ACTIONS_INTERVAL_TIME)
+
     for i in range(CHECK_ACTIONS_MAX_TRY):
         run_ids = find_run_id_for_sha(branch, head_sha, cwd=cwd)
         if run_ids:
