@@ -3,6 +3,7 @@ class MCAP_info:
         "CodeLanguageConverter": "https://github.com/Modeling-Coding-Automation-Project/CodeLanguageConverter.git",
         "simulation_manager": "https://github.com/Modeling-Coding-Automation-Project/simulation_manager.git",
         "MCAP_tester": "https://github.com/Modeling-Coding-Automation-Project/MCAP_tester.git",
+        "MCAP_python_navigation": "https://github.com/Modeling-Coding-Automation-Project/MCAP_python_navigation.git",
         "MCAP_python_control": "https://github.com/Modeling-Coding-Automation-Project/MCAP_python_control.git",
         "MCAP_python_optimization": "https://github.com/Modeling-Coding-Automation-Project/MCAP_python_optimization.git",
         "MCAP_python_mpc": "https://github.com/Modeling-Coding-Automation-Project/MCAP_python_mpc.git",
