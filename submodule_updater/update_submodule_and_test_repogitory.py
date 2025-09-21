@@ -30,6 +30,8 @@ def create_working_branch(repo_path):
     branch_name = f"update-submodule-{today}"
     cwd = os.path.abspath(repo_path)
 
+    run_os_command("git clean -fx -d", cwd)
+    run_os_command("git fetch", cwd)
     run_os_command("git checkout develop", cwd)
     run_os_command("git pull", cwd)
 
