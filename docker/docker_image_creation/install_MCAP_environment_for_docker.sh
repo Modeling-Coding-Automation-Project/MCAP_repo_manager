@@ -24,13 +24,6 @@ curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > m
     && rm microsoft.gpg
 
 apt update -q
-apt install -y -q code
-
-code --install-extension ms-python.python
-code --install-extension ms-python.autopep8
-code --install-extension ms-vscode.cpptools-extension-pack
-code --install-extension mhutchie.git-graph
-code --install-extension xaver.clang-format
 
 apt install -y -q git
 apt install -y -q build-essential
