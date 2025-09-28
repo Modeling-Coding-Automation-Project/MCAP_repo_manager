@@ -311,8 +311,18 @@ def main():
         print(f"[ERROR] Start file not found: {start_path}", file=sys.stderr)
         sys.exit(1)
 
-    root = os.path.abspath(
-        args.root) if args.root else os.path.dirname(start_path)
+    if args.root:
+        root = os.path.abspath(args.root)
+    else:
+        # Default to the parent of the start file's directory (one level up)
+        start_dir = os.path.dirname(start_path)
+        parent_dir = os.path.abspath(os.path.join(start_dir, os.pardir))
+        # If the parent directory is the same as start_dir (e.g., start_dir is a drive root),
+        # fall back to using start_dir as the root.
+        if os.path.realpath(parent_dir) == os.path.realpath(start_dir):
+            root = start_dir
+        else:
+            root = parent_dir
     ensure_within_root(start_path, root)
 
     files, name_to_path, name_to_all_paths = discover_closure(
