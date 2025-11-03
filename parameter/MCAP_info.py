@@ -16,5 +16,6 @@ class MCAP_info:
         "python_mpc_to_cpp": "https://github.com/Modeling-Coding-Automation-Project/python_mpc_to_cpp.git",
         "Hardware_Test_Arduino_Due": "https://github.com/Modeling-Coding-Automation-Project/Hardware_Test_Arduino_Due.git",
         "Hardware_Test_Nucleo_F401RE": "https://github.com/Modeling-Coding-Automation-Project/Hardware_Test_Nucleo_F401RE.git",
+        "Hardware_Test_Raspberry_Pi": "https://github.com/Modeling-Coding-Automation-Project/Hardware_Test_Raspberry_Pi.git",
         "MCAP_Playground": "https://github.com/Modeling-Coding-Automation-Project/MCAP_Playground.git",
     }
