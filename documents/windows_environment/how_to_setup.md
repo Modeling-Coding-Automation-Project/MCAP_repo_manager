@@ -80,7 +80,7 @@ wsl --update
 
 以下のリンク先から、Visual Studio Codeのインストーラをダウンロードしてインストールする。
 
-https://code.visualstudio.com/download
+<https://code.visualstudio.com/download>
 
 Visual Studio Codeを開き、「Extensions」をクリックし、以下の拡張機能をインストールする。
 
