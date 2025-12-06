@@ -2,8 +2,8 @@
 
 ## Windows
 
-Windows環境構築手順
+[Windows環境構築手順](./windows_environment/how_to_setup.md)
 
 ## Linux
 
-Ubuntu環境構築手順
+Ubuntu環境構築手順（作成中）

@@ -9,6 +9,8 @@
   - [2. Ubuntu 24.04をインストール](#2-ubuntu-2404をインストール)
   - [3. Visual Studio Codeをインストール](#3-visual-studio-codeをインストール)
   - [4. Visual Studio CodeからWSL Ubuntuを開く](#4-visual-studio-codeからwsl-ubuntuを開く)
+  - [5. リポジトリクローンとDockerのインストール](#5-リポジトリクローンとdockerのインストール)
+  - [6. Dockerを開く](#6-dockerを開く)
 
 ## 要件
 
@@ -93,3 +95,56 @@ Visual Studio Codeを開き、「Extensions」をクリックし、以下の拡�
 
 ![image](./images/click_remote_explorer.png)
 
+「WSL Targets」を開く。
+
+![image](./images/select_wsl_targets.png)
+
+「Ubuntu-24.04」がリストされているので、マウスカーソルを合わせて右矢印をクリックする。
+
+![image](./images/select_ubuntu.png)
+
+これにより、のWSL Ubuntu環境がVisual Studio Codeで開かれる。左下に「WSL: Ubuntu24.04」と表示されていることを確認する。
+
+## 5. リポジトリクローンとDockerのインストール
+
+Visual Studio Codeのターミナルで、以下のコマンドを実行する。
+
+```bash
+git clone https://github.com/Modeling-Coding-Automation-Project/MCAP_repo_manager.git
+```
+
+![image](./images/git_clone_mcap.png)
+
+「MCAP_repo_manager」一式がダウンロードされるので、「Open Folder」をクリックしてそのディレクトリを開く。
+
+![image](./images/click_open_folder.png)
+
+![image](./images/click_MCAP_repo_manager.png)
+
+「Do you trust the authors of the files in this folder?」と表示されたら、「Yes, I trust the authors」を選択する。
+
+次に、「docker」フォルダの「install_docker_environment.sh」を実行する。
+
+![image](./images/show_install_docker_environment.png)
+
+ターミナルを表示し、以下のコマンドを実行する。
+
+```bash
+cd ./docker
+chmod +x ./*.sh
+./install_docker_environment.sh
+```
+
+Dockerのインストールが始まる。途中、エンターキーの入力を求められる場合があるので、エンターを押す。
+
+![image](./images/require_enter_key.png)
+
+## 6. Dockerを開く
+
+左下の「>< WSL: Ubuntu-24.04」をクリックし、
+
+![image](./images/WSL_Ubuntu-24.04.png)
+
+「Reopen in Container」をクリックする。
+
+![image](./images/reopen_in_container.png)
