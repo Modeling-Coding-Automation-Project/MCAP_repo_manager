@@ -7,6 +7,8 @@
   - [要件](#要件)
   - [1. WSLの有効化](#1-wslの有効化)
   - [2. Ubuntu 24.04をインストール](#2-ubuntu-2404をインストール)
+  - [3. Visual Studio Codeをインストール](#3-visual-studio-codeをインストール)
+  - [4. Visual Studio CodeからWSL Ubuntuを開く](#4-visual-studio-codeからwsl-ubuntuを開く)
 
 ## 要件
 
@@ -55,4 +57,39 @@ wsl --update
 
 どちらでも問題ないので、「Ubuntu 24.04.~~」をインストールすること。
 
-インストールが終わると、「開く」というボタンが表示されるので、
+インストールが終わると、「開く」というボタンが表示されるので、クリックする。
+
+![image](./images/open_ubuntu_from_store.png)
+
+初回起動時は、インストール処理が入るので、待つ。
+
+![image](./images/ubuntu_installing.png)
+
+しばらく待つと、ユーザー名とパスワードの入力を求められる。
+
+![image](./images/ubuntu_user_setup.png)
+
+自由に決めてよいので、ユーザー名とパスワードを入力する。パスワードは入力しても、画面上には表示されていないので注意。
+
+![image](./images/ubuntu_installed.png)
+
+## 3. Visual Studio Codeをインストール
+
+以下のリンク先から、Visual Studio Codeのインストーラをダウンロードしてインストールする。
+
+https://code.visualstudio.com/download
+
+Visual Studio Codeを開き、「Extensions」をクリックし、以下の拡張機能をインストールする。
+
+![image](./images/extensions_remote_development.png)
+
+![image](./images/extensions_docker.png)
+
+画像のように、検索欄で「Remote Development」、「Docker」を入力すると、項目が現れる。
+
+## 4. Visual Studio CodeからWSL Ubuntuを開く
+
+「Remote Explorer」を開き、
+
+![image](./images/click_remote_explorer.png)
+
