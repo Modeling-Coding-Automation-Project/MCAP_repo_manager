@@ -8,7 +8,6 @@
   - [1. WSLの有効化](#1-wslの有効化)
   - [2. Ubuntu 24.04をインストール](#2-ubuntu-2404をインストール)
 
-
 ## 要件
 
 Windows11 25H2、またはそれに近いOSバージョンであること。
@@ -20,16 +19,27 @@ Windows11 25H2、またはそれに近いOSバージョンであること。
 以下のように項目が表示されるので、「Windowsの機能の有効化または無効化」をクリックして開く。
 
 「Linux 用 Windows サブシステム」をチェックして有効化する。
-
 「Hype-V」をチェックして有効化する。
 
+![image](./images/windows_function_activate.png)
 
 OKをクリックしてウィンドウを閉じ、PCを再起動する。
 
 次に、WSLを最新に更新する。
 
-スタート画面を開き、「PowerShell」と入力し、
+スタート画面を開き、「PowerShell」と入力し、PowerShellをクリックして開く。
 
+開いたターミナル画面で、以下のコマンドを実行する。
+
+```powershell
+wsl --update
+```
 
 ## 2. Ubuntu 24.04をインストール
+
+
+スタート画面を開き、「PowerShell」と入力し、「Microsoft Store」を開く。
+
+検索欄にUbuntuと入力し、Ubuntu 24.04 を選択してインストールする。
+
 
