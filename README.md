@@ -4,13 +4,21 @@
 
 本組織「Modeling-Coding-Automation-Project」にあるリポジトリ群をまとめてGit操作を行うための、便利なスクリプトをまとめています。
 
-また、Dockerによる開発環境も整備しています。以下リンク先のイメージを使えば、すぐに開発を始めることができます。
+## 環境構築手順
 
-https://hub.docker.com/r/claudeashford/mcap_env
+本組織「Modeling-Coding-Automation-Project」にあるリポジトリ群を使うための環境構築手順を、以下で説明しています。
+
+[環境構築手順](./documents/environment.md)
+
+## Dockerイメージについて
+
+Dockerによる開発環境も整備しています。以下リンク先のイメージを使えば、すぐに開発を始めることができます。
+
+<https://hub.docker.com/r/claudeashford/mcap_env>
 
 以下のコマンドを実行してイメージを取得できます。
 
-```
+```bash
 docker pull claudeashford/mcap_env
 ```
 

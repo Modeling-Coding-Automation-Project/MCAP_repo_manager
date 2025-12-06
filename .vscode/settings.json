@@ -83,4 +83,5 @@
     ],
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true,
+    "markdown.extension.toc.updateOnSave": true,
 }
