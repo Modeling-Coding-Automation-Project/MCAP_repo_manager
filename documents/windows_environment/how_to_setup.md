@@ -11,6 +11,7 @@
   - [4. Visual Studio CodeからWSL Ubuntuを開く](#4-visual-studio-codeからwsl-ubuntuを開く)
   - [5. リポジトリクローンとDockerのインストール](#5-リポジトリクローンとdockerのインストール)
   - [6. Dockerを開く](#6-dockerを開く)
+  - [7. 動作確認](#7-動作確認)
 
 ## 要件
 
@@ -139,6 +140,14 @@ Dockerのインストールが始まる。途中、エンターキーの入力�
 
 ![image](./images/require_enter_key.png)
 
+インストール完了後、以下のコマンドを実行し、Dockerを再起動する。
+
+```bash
+sudo sytemctl restart docker
+```
+
+それでも以降の作業がエラーで進まない場合は、WSLを閉じ、WSL Ubuntuを再起動する。またはPCを再起動する。
+
 ## 6. Dockerを開く
 
 左下の「>< WSL: Ubuntu-24.04」をクリックし、
@@ -148,3 +157,47 @@ Dockerのインストールが始まる。途中、エンターキーの入力�
 「Reopen in Container」をクリックする。
 
 ![image](./images/reopen_in_container.png)
+
+Docker Hubからイメージのダウンロードが始まる。サイズが大きいので、少し時間がかかる。
+
+イメージのダウンロード、コンテナの起動、Visual Studio Codeの拡張機能のセットアップが自動で行われ、以下のように表示される。
+
+![image](./images/docker_container_setup_finished.png)
+
+## 7. 動作確認
+
+ここまでの作業で、環境構築は完了している。
+
+しかし、初回はPythonの仮想環境のパス指定が必要であるので、動作確認も兼ねて行う。
+
+メニューバーの「File」、「Open Folder」で、「/opt/ModelingCodingAutomationProject/python_mpc_to_cpp」を開く。
+
+![image](./images/open_demo.png)
+
+次に、「sample」フォルダから任意のPythonコードを開く。
+
+![image](./images/open_sample.png)
+
+右下のPythonバージョン「3.12.3」と書かれているところをクリックする。
+
+![image](./images/click_python_version.png)
+
+「Enter interpreter path...」をクリックする。
+
+![image](./images/click_enter_interpreter_path.png)
+
+「Find」をクリックする。
+
+![image](./images/click_find.png)
+
+「/opt/venv_py_MCAP/bin/python3」をクリックする。
+
+![image](./images/click_python3.png)
+
+左側の「Run and Debug」をクリックし、設定を「Python Debugger: Python File」に切り替える。
+
+![image](./images/change_debugger.png)
+
+上記画像の再生ボタンををクリック、またはF5を入力することで、コードを実行する。
+
+エラー無くC++コードが生成されたり、グラフウィンドウが表示されればOK。
