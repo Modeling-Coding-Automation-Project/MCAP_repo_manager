@@ -18,7 +18,7 @@ https://hub.docker.com/r/claudeashford/mcap_env
 
 以下のコマンドを実行してイメージを取得できます。
 
-```
+```bash
 docker pull claudeashford/mcap_env
 ```
 
