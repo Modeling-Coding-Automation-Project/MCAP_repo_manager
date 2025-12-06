@@ -14,7 +14,7 @@
 
 Dockerによる開発環境も整備しています。以下リンク先のイメージを使えば、すぐに開発を始めることができます。
 
-https://hub.docker.com/r/claudeashford/mcap_env
+<https://hub.docker.com/r/claudeashford/mcap_env>
 
 以下のコマンドを実行してイメージを取得できます。
 
