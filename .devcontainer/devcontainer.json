@@ -1,6 +1,6 @@
 {
   "name": "mcap_env_container",
-  "image": "claudeashford/mcap_env:latest",
+  "image": "ghcr.io/modeling-coding-automation-project/mcap_env:latest",
   "extensions": [
     "ms-python.python",
     "ms-vscode-remote.vscode-remote-extensionpack",

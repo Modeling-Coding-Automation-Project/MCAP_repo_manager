@@ -14,17 +14,21 @@
 
 Dockerによる開発環境も整備しています。以下リンク先のイメージを使えば、すぐに開発を始めることができます。
 
-<https://hub.docker.com/r/claudeashford/mcap_env>
+<https://github.com/modeling-coding-automation-project/MCAP_Playground/pkgs/container/mcap_env>
 
 以下のコマンドを実行してイメージを取得できます。
 
 ```bash
-docker pull claudeashford/mcap_env
+docker pull ghcr.io/modeling-coding-automation-project/mcap_env:latest
 ```
 
 イメージの詳細については、「docker/docker_image_creation/Dockerfile」、「docker/docker_image_creation/install_MCAP_environment_for_docker.sh」をご参照ください。
 
 WSL UbuntuにDocker環境を整えるには、「docker/install_docker_environment.sh」を実行するだけですぐに整えることができます。
+
+※以前はDockerHubにイメージを置いていましたが、GitHub Container Registry (ghcr) へ変更しました。以下リンク先のリポジトリは今後削除される可能性がありますのでご注意ください。
+
+<https://hub.docker.com/r/claudeashford/mcap_env>
 
 ## サポート
 
