@@ -34,6 +34,7 @@ apt install -y -q xvfb
 apt install -y -q clang-format
 apt install -y -q nano
 apt install -y -q pybind11-dev
+apt install -y -q fonts-noto-cjk
 
 # install python3.12
 apt install -y -q python3.12 python3.12-dev python3.12-venv
