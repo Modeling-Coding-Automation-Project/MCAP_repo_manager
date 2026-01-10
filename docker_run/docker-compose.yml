@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mcap_env:
-    image: claudeashford/mcap_env
+    image: ghcr.io/modeling-coding-automation-project/mcap_env
     container_name: mcap_env_container
     restart: unless-stopped
     tty: true
