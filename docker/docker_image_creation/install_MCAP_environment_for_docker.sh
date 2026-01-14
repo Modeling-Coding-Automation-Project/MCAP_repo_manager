@@ -18,11 +18,6 @@ apt install -y -q curl \
     xdg-utils \
     unzip \
 
-curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg \
-    && install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ \
-    && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' \
-    && rm microsoft.gpg
-
 apt update -q
 
 apt install -y -q git
@@ -42,7 +37,7 @@ python3 -m venv /opt/venv_py_MCAP
 
 /opt/venv_py_MCAP/bin/pip install --upgrade pip
 /opt/venv_py_MCAP/bin/pip install --upgrade setuptools
-/opt/venv_py_MCAP/bin/pip install numpy scipy control matplotlib mplcursors pandas jupyter openpyxl sympy astor pybind11 networkx
+/opt/venv_py_MCAP/bin/pip install numpy scipy control matplotlib mplcursors pandas jupyter openpyxl sympy astor pybind11 networkx dill requests
 apt install -y -q python3-tk
 
 ## Clone MCAP repositories
