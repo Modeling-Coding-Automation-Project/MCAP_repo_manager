@@ -30,6 +30,16 @@ WSL UbuntuにDocker環境を整えるには、「docker/install_docker_environme
 
 <https://hub.docker.com/r/claudeashford/mcap_env>
 
+## その他
+
+本組織「Modeling-Coding-Automation-Project」にあるリポジトリ群は、多数のGitサブモジュールを利用しています。
+
+そのGitサブモジュールをまとめて更新したい場合は、以下のコマンドで行うことができます。
+
+```bash
+git submodule foreach git pull
+```
+
 ## サポート
 
 新規にissueを作成して、詳細をお知らせください。

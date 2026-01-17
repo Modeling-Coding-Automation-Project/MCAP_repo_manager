@@ -25,10 +25,18 @@ Windows11 25H2、またはそれに近いOSバージョンであること。
 
 ![image](./images/open_windows_function_activate.png)
 
+- Windows11 Pro, Enterpriseの場合
+
 「Linux 用 Windows サブシステム」をチェックして有効化する。
 「Hype-V」をチェックして有効化する。
 
 ![image](./images/windows_function_activate.png)
+
+- Windows11 Homeの場合
+
+「Linux 用 Windows サブシステム」をチェックして有効化する。
+
+![image](./images/windows_function_activate_home.png)
 
 OKをクリックしてウィンドウを閉じ、PCを再起動する。
 
@@ -143,7 +151,7 @@ Dockerのインストールが始まる。途中、エンターキーの入力�
 インストール完了後、以下のコマンドを実行し、Dockerを再起動する。
 
 ```bash
-sudo sytemctl restart docker
+sudo systemctl restart docker
 ```
 
 それでも以降の作業がエラーで進まない場合は、WSLを閉じ、WSL Ubuntuを再起動する。またはPCを再起動する。
