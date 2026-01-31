@@ -15,7 +15,7 @@ apt install -y -q \
     libgtk-3-0 \
     libnss3 \
     libxss1 \
-    libasound2 \
+    libasound2t64 \
     xdg-utils \
     unzip \
     git \
