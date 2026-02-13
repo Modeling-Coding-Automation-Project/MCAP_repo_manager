@@ -1,6 +1,5 @@
 class MCAP_info:
     repository_list = {
-        "CodeLanguageConverter": "https://github.com/Modeling-Coding-Automation-Project/CodeLanguageConverter.git",
         "simulation_manager": "https://github.com/Modeling-Coding-Automation-Project/simulation_manager.git",
         "MCAP_tester": "https://github.com/Modeling-Coding-Automation-Project/MCAP_tester.git",
         "MCAP_python_navigation": "https://github.com/Modeling-Coding-Automation-Project/MCAP_python_navigation.git",
