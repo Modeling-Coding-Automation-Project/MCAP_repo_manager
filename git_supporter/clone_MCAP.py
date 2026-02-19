@@ -3,10 +3,13 @@ This script provides a command-line utility to clone multiple Git repositories l
 It allows the user to specify a target folder via a command-line argument or a GUI folder selection dialog.
 The script changes the working directory to the selected folder and clones each repository using the system's Git command.
 """
+from __future__ import annotations
 
 import os
 import sys
-sys.path.append(os.getcwd())
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 import argparse
 import tkinter as tk
