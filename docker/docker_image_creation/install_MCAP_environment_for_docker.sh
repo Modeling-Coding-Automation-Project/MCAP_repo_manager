@@ -44,6 +44,8 @@ python3 -m venv /opt/venv_py_MCAP
     control \
     matplotlib \
     mplcursors \
+    plotly \
+    dash \
     pytest \
     pandas \
     jupyter \
