@@ -36,13 +36,19 @@ def find_run_id_for_sha(branch: str, head_sha: str, limit: int = 30, cwd=None) -
     return run_ids if run_ids else None
 
 
-def gh_wait_run(run_id: int, cwd=None) -> int:
-    """Wait for the GitHub Actions run to complete and return the exit status."""
-    cp = subprocess.run(
-        ["gh", "run", "watch", str(run_id), "--exit-status"],
-        text=True,
-        cwd=cwd,
-    )
+def gh_wait_run(run_id: int, cwd=None, retry=3) -> int:
+    for i in range(retry):
+        cp = subprocess.run(
+            ["gh", "run", "watch", str(run_id), "--exit-status"],
+            text=True,
+            cwd=cwd,
+        )
+        if cp.returncode == 0:
+            return 0
+
+        print(f"Retry gh run watch ({i + 1}/{retry})")
+        time.sleep(5)
+
     return cp.returncode
 
 
