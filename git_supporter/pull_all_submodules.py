@@ -47,6 +47,7 @@ if __name__ == "__main__":
     submodule_directories = find_git_directories(folder_path)
     for submodule_directory in submodule_directories:
         os.chdir(submodule_directory)
+        subprocess.run("git fetch --prune", shell=True)
         subprocess.run("git checkout main", shell=True)
         subprocess.run("git pull", shell=True)
         subprocess.run("git checkout .", shell=True)
