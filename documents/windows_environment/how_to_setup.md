@@ -6,7 +6,7 @@
   - [目次](#目次)
   - [要件](#要件)
   - [1. WSLの有効化](#1-wslの有効化)
-  - [2. Ubuntu 24.04をインストール](#2-ubuntu-2404をインストール)
+  - [2. Ubuntu 26.04をインストール](#2-ubuntu-2604をインストール)
   - [3. Visual Studio Codeをインストール](#3-visual-studio-codeをインストール)
   - [4. Visual Studio CodeからWSL Ubuntuを開く](#4-visual-studio-codeからwsl-ubuntuを開く)
   - [5. リポジトリクローンとDockerのインストール](#5-リポジトリクローンとdockerのインストール)
@@ -54,19 +54,13 @@ wsl --update
 
 ![image](./images/wsl_update.png)
 
-## 2. Ubuntu 24.04をインストール
+## 2. Ubuntu 26.04をインストール
 
 スタート画面を開き、「Store」と入力し、「Microsoft Store」を開く。
 
 ![image](./images/open_store.png)
 
-検索欄にUbuntuと入力し、Ubuntu 24.04 を選択してインストールする。
-
-![image](./images/store_ubuntu.png)
-
-この時、「Ubuntu 24.04.01 LTS」のように表示されているが、ここは時期によっては「Ubuntu 24.04.02 LTS」となっているかもしれない。
-
-どちらでも問題ないので、「Ubuntu 24.04.~~」をインストールすること。
+検索欄にUbuntuと入力し、「Ubuntu 26.04 LTS」を選択してインストールする。
 
 インストールが終わると、「開く」というボタンが表示されるので、クリックする。
 
@@ -108,11 +102,9 @@ Visual Studio Codeを開き、「Extensions」をクリックし、以下の拡�
 
 ![image](./images/select_wsl_targets.png)
 
-「Ubuntu-24.04」がリストされているので、マウスカーソルを合わせて右矢印をクリックする。
+「Ubuntu-26.04」がリストされているので、マウスカーソルを合わせて右矢印をクリックする。
 
-![image](./images/select_ubuntu.png)
-
-これにより、のWSL Ubuntu環境がVisual Studio Codeで開かれる。左下に「WSL: Ubuntu24.04」と表示されていることを確認する。
+これによりWSL Ubuntu環境がVisual Studio Codeで開かれる。左下に「WSL: Ubuntu-26.04」と表示されていることを確認する。
 
 ## 5. リポジトリクローンとDockerのインストール
 
@@ -158,9 +150,7 @@ sudo systemctl restart docker
 
 ## 6. Dockerを開く
 
-左下の「>< WSL: Ubuntu-24.04」をクリックし、
-
-![image](./images/WSL_Ubuntu-24.04.png)
+左下の「>< WSL: Ubuntu-26.04」をクリックし、
 
 「Reopen in Container」をクリックする。
 
@@ -186,9 +176,7 @@ Docker Hubからイメージのダウンロードが始まる。サイズが大�
 
 ![image](./images/open_sample.png)
 
-右下のPythonバージョン「3.12.3」と書かれているところをクリックする。
-
-![image](./images/click_python_version.png)
+右下に表示されているPythonのバージョンをクリックする。
 
 「Enter interpreter path...」をクリックする。
 

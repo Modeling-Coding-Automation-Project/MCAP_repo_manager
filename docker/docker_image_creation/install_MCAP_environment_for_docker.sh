@@ -12,7 +12,7 @@ apt install -y -q \
     libx11-xcb1 \
     libxkbfile1 \
     libsecret-1-0 \
-    libgtk-3-0 \
+    libgtk-3-0t64 \
     libnss3 \
     libxss1 \
     libasound2t64 \
@@ -28,9 +28,9 @@ apt install -y -q \
     nano \
     pybind11-dev \
     fonts-noto-cjk \
-    python3.12 \
-    python3.12-dev \
-    python3.12-venv \
+    python3 \
+    python3-dev \
+    python3-venv \
     python3-tk
 
 # virtual environment setup
