@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import os
+import shutil
+import stat
 import sys
 from pathlib import Path
 
@@ -25,7 +27,7 @@ def replace_github_to_local_path(url_path):
 
 
 def update_submodules(repository_path):
-    command = "python " + PULL_ALL_SUBMODULES_PATH + " " + repository_path
+    command = f'python "{PULL_ALL_SUBMODULES_PATH}" "{repository_path}"'
     run_os_command(command)
 
 
@@ -34,8 +36,6 @@ def create_working_branch(repo_path):
     branch_name = f"update-submodule-{today}"
     cwd = os.path.abspath(repo_path)
 
-    run_os_command("git clean -fx -d", cwd)
-    run_os_command("git fetch", cwd)
     run_os_command("git checkout develop", cwd)
     run_os_command("git pull", cwd)
 
@@ -44,7 +44,7 @@ def create_working_branch(repo_path):
     run_os_command("git add .", cwd)
 
     # check if there is anything to commit
-    result = run_os_command("git status --porcelain", cwd, check=False)
+    result = run_os_command("git status --porcelain", cwd)
     if result.stdout.strip() == "":
         print("No changes to commit.")
         run_os_command("git checkout -", cwd)
@@ -87,34 +87,65 @@ def squash_merge_and_push(repo_path, branch_name):
     run_os_command(f"git push origin --delete {branch_name}", cwd)
 
 
-if __name__ == "__main__":
-    for repo_name, url_path in MCAP_info.repository_list.items():
-        folder_path = replace_github_to_local_path(url_path)
+def remove_readonly_file(function, path, exc_info):
+    if not isinstance(exc_info[1], PermissionError):
+        raise exc_info[1]
+    os.chmod(path, stat.S_IWRITE)
+    function(path)
 
-        # update submodules
-        update_submodules(folder_path)
 
+def update_repository(folder_path):
+    original_path = os.path.abspath(folder_path)
+    copy_path = original_path + "_"
+    git_dir = os.path.join(original_path, ".git")
+    if not os.path.isdir(git_dir) or os.path.islink(git_dir):
+        raise RuntimeError(f"Expected a local .git directory: {git_dir}")
+
+    update_submodules(original_path)
+    run_os_command("git clean -fx -d", original_path)
+    run_os_command("git fetch", original_path)
+
+    if os.path.lexists(copy_path):
+        if os.path.islink(copy_path) or not os.path.isdir(copy_path):
+            raise RuntimeError(f"Working copy is not a directory: {copy_path}")
+        print(f"Removing existing working copy: {copy_path}")
+        shutil.rmtree(copy_path, onerror=remove_readonly_file)
+    shutil.copytree(original_path, copy_path, symlinks=True)
+    try:
         update_exists_flag, branch_name, head_sha = create_working_branch(
-            folder_path)
+            copy_path)
 
         if update_exists_flag:
             # Update GitHub Actions workflow YAMLs to trigger on the new branch
-            head_sha = update_github_actions_yaml(folder_path, branch_name)
+            head_sha = update_github_actions_yaml(copy_path, branch_name)
             if not head_sha:
                 print("There are no GitHub Actions workflow files.")
+            else:
+                # Trigger GitHub Actions
+                success_flag = add_actions_and_check_results(
+                    branch_name, head_sha, copy_path)
 
-                squash_merge_and_push(folder_path, branch_name)
-                print(f"Submodule update of {folder_path} completed.")
-                continue
+                if not success_flag:
+                    sys.exit(1)
 
-            # Trigger GitHub Actions
-            success_flag = add_actions_and_check_results(
-                branch_name, head_sha, folder_path)
+                revert_github_actions_yaml(copy_path, branch_name)
 
-            if not success_flag:
-                sys.exit(1)
+            squash_merge_and_push(copy_path, branch_name)
+    except (Exception, SystemExit):
+        print(f"Update failed; working copy retained: {copy_path}")
+        raise
 
-            revert_github_actions_yaml(folder_path, branch_name)
+    shutil.rmtree(copy_path, onerror=remove_readonly_file)
+    run_os_command("git fetch", original_path)
+    run_os_command("git checkout .", original_path)
+    run_os_command("git checkout develop", original_path)
+    run_os_command("git pull", original_path)
+    run_os_command("git checkout main", original_path)
+    run_os_command("git pull", original_path)
+    print(f"Submodule update of {original_path} completed.")
 
-            squash_merge_and_push(folder_path, branch_name)
-            print(f"Submodule update of {folder_path} completed.")
+
+if __name__ == "__main__":
+    for repo_name, url_path in MCAP_info.repository_list.items():
+        folder_path = replace_github_to_local_path(url_path)
+        update_repository(folder_path)
