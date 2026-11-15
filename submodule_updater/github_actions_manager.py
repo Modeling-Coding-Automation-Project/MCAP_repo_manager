@@ -17,8 +17,11 @@ def gh_json(args: list[str], cwd=None) -> list[dict] | dict:
         check=True,
         capture_output=True,
         text=True,
+        encoding="utf-8",
         cwd=cwd,
     )
+    if cp.stdout is None or cp.stderr is None:
+        raise GHError("Failed to decode gh command output as UTF-8")
     out = cp.stdout.strip()
     return json.loads(out) if out else {}
 
